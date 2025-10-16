@@ -2,12 +2,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "getinstall.c"
+#include "getinstall.c" // helper functions
 
-// Main wget command
 void wget_command(const char *arg) {
     if(!arg || strlen(arg) == 0) {
-        printf("Usage: wget <github link>\n");
+        printf("Usage: wget <URL>\n");
         return;
     }
 
@@ -19,8 +18,8 @@ void wget_command(const char *arg) {
     printf("Downloading from: %s\n", arg);
     sleep(2); // simulate download
 
-    // downloaded file goes into userdata, NOT lib
-    if(install_file(filename, 0)) {
+    // Downloads go to userdata folder
+    if(install_file(filename, 0)) {  // 0 = userdata
         printf("Downloaded %s successfully to userdata!\n", filename);
     }
 }
