@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "getinstall.c" // use the helper functions
+#include <unistd.h>
+#include "getinstall.c"
 
 // Main wget command
 void wget_command(const char *arg) {
@@ -10,16 +11,16 @@ void wget_command(const char *arg) {
         return;
     }
 
-    // For simplicity, extract the filename from URL
+    // Extract filename from URL
     const char *filename = strrchr(arg, '/');
-    if(filename) filename++; // skip '/'
+    if(filename) filename++;
     else filename = arg;
 
     printf("Downloading from: %s\n", arg);
     sleep(2); // simulate download
 
-    // install in userdata folder
+    // downloaded file goes into userdata, NOT lib
     if(install_file(filename, 0)) {
-        printf("Downloaded %s successfully!\n", filename);
+        printf("Downloaded %s successfully to userdata!\n", filename);
     }
 }
